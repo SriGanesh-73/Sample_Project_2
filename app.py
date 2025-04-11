@@ -28,10 +28,10 @@ def login():
         if user and user.password == password:
             return redirect(url_for('dashboard', username=user.username))
         elif user and user.password != password:
-            return render_template('Login.html', error='Invalid password')
+            return render_template('templates/Login.html', error='Invalid password')
         else:
-            return render_template('Login.html', error='User not found')
-    return render_template('Login.html')
+            return render_template('templates/Login.html', error='User not found')
+    return render_template('templates/Login.html')
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -48,11 +48,11 @@ def register():
             db.session.commit()
             return redirect(url_for('login'))
         except:
-            return render_template('Register.html', error='Username or email already exists')
+            return render_template('templates/Register.html', error='Username or email already exists')
     return render_template('Register.html')
 @app.route('/dashboard/<username>', methods=['GET'])
 def dashboard(username):
-    return render_template('Dashboard.html', username=username)
+    return render_template('templates/Dashboard.html', username=username)
 @app.route('/logout', methods=['GET'])
 def logout():
     return redirect(url_for('login'))
